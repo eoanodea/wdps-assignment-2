@@ -3,3 +3,5 @@ services:
   kge:
     build: 
       context: .
+    volumes:
+      - ./main.py:/kge/main.py

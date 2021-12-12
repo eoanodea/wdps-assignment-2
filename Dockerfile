@@ -14,3 +14,5 @@ RUN pip install -e .
 
 WORKDIR /kge/data 
 RUN sh download_all.sh
+
+WORKDIR /kge
