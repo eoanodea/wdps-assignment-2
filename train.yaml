@@ -1,5 +1,5 @@
 job.type: train
-dataset.name: dbpedia500
+dataset.name: dbpedia50
 
 model: transe
 
