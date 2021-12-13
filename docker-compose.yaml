@@ -6,3 +6,4 @@ services:
     volumes:
       - ./main.py:/kge/main.py
       - ./train.yaml:/kge/examples/train.yaml
+      - ./results:/kge/local/experiments/main

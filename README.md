@@ -25,6 +25,6 @@ docker container ls
 To train a model:
 ```
 docker exec -it <container_name> /bin/sh
-kge start examples/train.yaml --folder="/kge/local/experiments/main" --job.device cpu 
+kge start examples/train.yaml --folder="/kge/local/experiments/main/new" --job.device cpu 
 ```
 
