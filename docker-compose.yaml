@@ -5,3 +5,4 @@ services:
       context: .
     volumes:
       - ./main.py:/kge/main.py
+      - ./train.yaml:/kge/examples/main-train.yaml

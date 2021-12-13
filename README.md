@@ -1,14 +1,15 @@
 Note Alex: Good luck on the initial download, it takes like +- 20 minutes.
 
 TODO:
-- [ ]  Download LibKG
-- [ ]  Train DBPedia (consider other models TransE, conflicts etc)
+- [x]  Download LibKG
+- [x]  Train DBPedia (consider other models TransE, conflicts etc)
 - [ ]  Link prediction using test dataset
 - [ ]  Determine whether there are relations
 - [ ]  Simple method to filter out noise
 - [ ]  Provide high quality output
 - [ ]  Which links should be kept and which should not
-- [ ]  
+- [ ]
+
 Fun commands:
 
 To start the container:
@@ -24,7 +25,6 @@ docker container ls
 To train a model:
 ```
 docker exec -it <container_name> /bin/sh
-cd /kge
-kge start examples/toy-complex-train.yaml --job.device cpu
+kge start examples/train.yaml --folder="/kge/local/experiments/main" --job.device cpu 
 ```
 
