@@ -23,7 +23,7 @@ eval:
   batch_size: 512
 
 negative_sampling:
-  num_samples.s: 3  # default: p=0; o=s
+  num_samples.s: 3 # default: p=0; o=s
   sampling_type: uniform
 
 lookup_embedder:

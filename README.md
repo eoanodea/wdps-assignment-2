@@ -28,3 +28,9 @@ docker exec -it <container_name> /bin/sh
 kge start examples/train.yaml --folder="/kge/local/experiments/main/new" --job.device cpu 
 ```
 
+
+To train a Rescal Model
+```
+kge start examples/rescal.yaml --folder="/kge/local/experiments/main/rescal" --job.device cpu 
+```
+
