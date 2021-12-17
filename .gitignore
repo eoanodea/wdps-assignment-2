@@ -1,2 +1,4 @@
 kge/
 results/*
+*.log
+*.csv

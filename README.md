@@ -34,3 +34,8 @@ To train a Rescal Model
 kge start examples/rescal.yaml --folder="/kge/local/experiments/main/rescal" --job.device cpu 
 ```
 
+To clean an output file
+```
+python3 clean.py results/rescal/test-result.csv > output.csv
+```
+
