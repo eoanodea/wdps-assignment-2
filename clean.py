@@ -1,17 +1,7 @@
 import sys
 import re
 
-try:
-    _, INPUT = sys.argv
-except Exception as e:
-    print('Usage: python clean.py INPUT')
-    sys.exit(0)
-
-filename = INPUT
-file = open(filename, 'r')
-
-with open(INPUT) as f:
-    contents = f.readlines()
+def clean_contents(contents):
     id = '\[[a-zA-Z0-9]+\]'
     output = ""
 
@@ -23,7 +13,20 @@ with open(INPUT) as f:
             result = re.findall(prefix, stripped)
             output = output + result[0] + "\n"
 
-    line = output.replace(':',",").replace("   ", "")
+    head = "label, value"
+    body = output.replace(':',",").replace("   ", "")
+    return head, body
 
-    print("label, value")
-    print(line)
+if __name__ == '__main__':
+    try:
+        _, INPUT = sys.argv
+    except Exception as e:
+        print('Usage: python clean.py INPUT')
+        sys.exit(0)
+
+    filename = INPUT
+    with open(INPUT) as f:
+        contents = f.readlines()
+        head, body = clean_contents(contents)
+        print(head) 
+        print(body)
