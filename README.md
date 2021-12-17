@@ -8,7 +8,6 @@ TODO:
 - [ ]  Simple method to filter out noise
 - [ ]  Provide high quality output
 - [ ]  Which links should be kept and which should not
-- [ ]
 
 Fun commands:
 
