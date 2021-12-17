@@ -29,5 +29,6 @@ if __name__ == '__main__':
         with open(path) as f:
             contents = f.readlines()
             head, body = clean_contents(contents)
+            print("#" + path)
             print(head) 
             print(body)
