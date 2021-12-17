@@ -4,7 +4,7 @@ import re
 try:
     _, INPUT = sys.argv
 except Exception as e:
-    print('Usage: python starter-code.py INPUT')
+    print('Usage: python clean.py INPUT')
     sys.exit(0)
 
 filename = INPUT
@@ -18,8 +18,12 @@ with open(INPUT) as f:
     for content in contents:
         stripped = re.sub(id, '', content)
         prefix = '^   [mean_|hits_].*'
+
         if len(re.findall(prefix, stripped)) > 0:
             result = re.findall(prefix, stripped)
-            output = output + result[0] + ",\n"
+            output = output + result[0] + "\n"
 
-    print(output.replace(':',","))
+    line = output.replace(':',",").replace("   ", "")
+
+    print("label, value")
+    print(line)
