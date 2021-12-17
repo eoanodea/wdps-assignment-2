@@ -8,7 +8,7 @@ except Exception as e:
     sys.exit(0)
 
 
-filename = INPUT;
+filename = INPUT
 file = open(filename, 'r')
 
 
