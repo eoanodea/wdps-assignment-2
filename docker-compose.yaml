@@ -1,9 +1,12 @@
-version: '3.8'
+version: "3.8"
 services:
   kge:
-    build: 
+    build:
       context: .
     volumes:
       - ./main.py:/kge/main.py
-      - ./dbpedia50-complex.yaml:/kge/examples/dbpedia50-complex.yaml
+      - ./results/dbpedia50-complex.yaml:/kge/examples/dbpedia50-complex.yaml
+      - ./results:/kge/local/experiments/main
+      - ./train.yaml:/kge/examples/train.yaml
+      - ./rescal.yaml:/kge/examples/rescal.yaml
       - ./results:/kge/local/experiments/main
