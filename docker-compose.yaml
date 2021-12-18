@@ -5,5 +5,5 @@ services:
       context: .
     volumes:
       - ./main.py:/kge/main.py
-      - ./train.yaml:/kge/examples/train.yaml
+      - ./dbpedia50-complex.yaml:/kge/examples/dbpedia50-complex.yaml
       - ./results:/kge/local/experiments/main
