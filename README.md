@@ -38,3 +38,29 @@ To clean an output file
 python3 clean.py results/rescal/test-result.csv > output.csv
 ```
 
+To see the predictions, you need to modify the KGE model located here:
+```
+/kge/mode/kge_model.py
+```
+
+Add this code *above* the return statement [Line 702]
+
+```py
+        tensors = self._scorer.score_emb(s, p, o, combine="sp_")
+        resultList = []
+
+        for tensorOuter in tensors:
+            resultOuter = []
+            for tensorInner in tensorOuter:
+                resultOuter.append(tensorInner.item())
+            resultList.append(resultOuter)
+
+        print(resultList)
+```
+
+And run this commend to test
+
+```
+kge test local/experiments/main/[DIR NAME] > test-result.csv
+```
+        
