@@ -23,8 +23,7 @@ class EnsembleScorer(RelationalScorer):
         n = 0 # length of what??
         score = (1/n) + sum([PlattScaler(model.score_emb(s_emb, p_emb, o_emb, combine)) for model in models])
 
-        print(score)
-        return self.models[0]._scorer.score_emb(s_emb, p_emb, o_emb, combine)
+        return score
 
     def load(self, models):
         self.models = models
