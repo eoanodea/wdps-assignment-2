@@ -9,10 +9,10 @@ services:
       - ./results:/kge/local/experiments/main
       - ./configurations/train.yaml:/kge/examples/train.yaml
       - ./configurations/rescal.yaml:/kge/examples/rescal.yaml
+      - ./configurations/DistMult.yaml:/kge/examples/DistMult.yaml
       - ./kge_model.py:/kge/kge/model/kge_model.py
       - ./output:/kge/output
       - ./model_init.py:/kge/kge/model/__init__.py
       - ./ensemble.py:/kge/kge/model/ensemble.py
       - ./ensemble.yaml:/kge/kge/model/ensemble.yaml
       - ./config-default.yaml:/kge/kge/config-default.yaml
-    
