@@ -1,34 +1,52 @@
-# Import base libraries
-import sys
-import glob, os
+import torch
+from kge import Config, Dataset
+from kge.model.kge_model import KgeEmbedder, KgeModel, RelationalScorer
 
-from tqdm import tqdm
-import argparse
+class EnsembleScorer(RelationalScorer):
+    def __init__(self, config: Config, dataset: Dataset, configuration_key=None):
+        super().__init__(config, dataset, configuration_key)
+        self.models = []
 
-from clean import clean_contents
+    def score_emb(
+        self,
+        s_emb: torch.Tensor,
+        p_emb: torch.Tensor,
+        o_emb: torch.Tensor,
+        combine: str,
+    ):
+        def PlattScaler(score):
+            # The scalars ωm1 and ωm0 in Equation 5 denote the learned weight and bias of the logistic regression (Platt-Scaler) for the model m.
+            w0 = 0 # ??
+            w1 = 0 # ??
+            1/(1+math.exp(-(w1 * score + w0)))
 
-# Execute main functionality
-if __name__ == '__main__':
-    def to_list(arg):
-        return [str(i) for i in arg.split(",")]
+        n = 0 # length of what??
+        score = (1/n) + sum([PlattScaler(model.score_emb(s_emb, p_emb, o_emb, combine)) for model in models])
 
-    parser = argparse.ArgumentParser(sys.argv[0])
-    parser.add_argument("-f", "--folder", help="The folder path containing the log file(s)", type=str, nargs="?")
-    parser.add_argument("-l", "--logs", help="The path to the log file(s)", type=to_list, nargs="?")
-    args = parser.parse_args()
+        print(score)
+        return self.models[0]._scorer.score_emb(s_emb, p_emb, o_emb, combine)
 
-    log_files = []
-    if args.logs is not None:
-        log_files = args.logs
-    elif args.folder is not None:
-        for file in os.listdir(args.folder):
-            if file.endswith(".log"):
-                log_files.append(args.folder + "/" + file)
+    def load(self, models):
+        self.models = models
 
-    for path in log_files:
-        with open(path) as f:
-            contents = f.readlines()
-            head, body = clean_contents(contents)
-            print("#" + path)
-            print(head) 
-            print(body)
+
+class Ensemble(KgeModel):
+    def __init__(
+        self,
+        config: Config,
+        dataset: Dataset,
+        configuration_key=None,
+        init_for_load_only=False,
+    ):
+        super().__init__(
+            config=config,
+            dataset=dataset,
+            scorer=EnsembleScorer,
+            configuration_key=configuration_key,
+            init_for_load_only=init_for_load_only,
+        )
+        self.models = []
+
+    def load(self, models):
+        self.models = models
+        self._scorer.load(models)

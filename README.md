@@ -1,3 +1,8 @@
+# Web Data Processing Systems - Assignment #2
+
+## Description
+Link prediction with various Link Prediction models using LibKGE
+
 Note Alex: Good luck on the initial download, it takes like +- 20 minutes.
 
 TODO:

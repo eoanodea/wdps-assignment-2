@@ -1,0 +1,11 @@
+import: [lookup_embedder]
+
+ensemble:
+  type: ensemble 
+  class_name: Ensemble
+  entity_embedder:
+    type: lookup_embedder
+    +++: +++
+  relation_embedder:
+    type: lookup_embedder
+    +++: +++
