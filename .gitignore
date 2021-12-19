@@ -1,3 +1,4 @@
 kge/
 results/*
 *.log
+.DS_Store
