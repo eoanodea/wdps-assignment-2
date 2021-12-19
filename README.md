@@ -5,7 +5,7 @@ Link prediction with various Link Prediction models using LibKGE
 
 Note Alex: Good luck on the initial download, it takes like +- 20 minutes.
 
-TODO:
+## Todo
 - [x]  Download LibKG
 - [x]  Train DBPedia (consider other models TransE, conflicts etc)
 - [ ]  Link prediction using test dataset
@@ -14,7 +14,7 @@ TODO:
 - [ ]  Provide high quality output
 - [ ]  Which links should be kept and which should not
 
-Fun commands:
+## Fun commands
 
 To start the container:
 ```

@@ -1,5 +1,5 @@
 kge/
 results/*
 *.log
-__pycache__
+__pycache__/
 .DS_Store
