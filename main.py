@@ -10,9 +10,10 @@ import argparse
 # Torch and KGE
 import torch
 import kge
-from kge.model import KgeModel, Ensemble
+from kge.model import KgeModel
 from kge.util.io import load_checkpoint
 from kge.job.eval import EvaluationJob
+from kge.model.ensemble import Ensemble
 
 # Main Class
 class Main():
