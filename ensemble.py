@@ -1,5 +1,3 @@
-import math
-
 import torch
 
 from kge import Config, Dataset
@@ -19,14 +17,14 @@ class EnsembleScorer(RelationalScorer):
     ):
         def PlattScaler(model):
             # The scalars ωm1 and ωm0 in Equation 5 denote the learned weight and bias of the logistic regression (Platt-Scaler) for the model m.
-            w0 = 0 # BIAS
-            w1 = 0 # WEIGHT
+            bias = torch.Tensor([1,])
+            weight = torch.Tensor([1,]) 
             score = model._scorer.score_emb(s_emb, p_emb, o_emb, combine)
-            1/(1+math.exp(-(w1 * score + w0)))
+            return 1/(1+torch.exp(-(weight * score + bias)))
 
         n = len(self.models)
-        # scores = (1/n) + sum([PlattScaler(model) for model in self.models])
-        scores = (1/n) + sum([model._scorer.score_emb(s_emb, p_emb, o_emb, combine) for model in self.models])
+        scores = (1/n) + sum([PlattScaler(model) for model in self.models])
+        # scores = (1/n) + sum([model._scorer.score_emb(s_emb, p_emb, o_emb, combine) for model in self.models])
 
         return scores
 
@@ -53,3 +51,4 @@ class Ensemble(KgeModel):
     def load(self, models):
         self.models = models
         self._scorer.load(models)
+    
