@@ -11,3 +11,5 @@ services:
       - ./configurations/rescal.yaml:/kge/examples/rescal.yaml
       - ./kge_model.py:/kge/kge/model/kge_model.py
       - ./output:/kge/output
+      - ./ensemble.py:/kge/model/ensemble.py
+      - ./ensemble.yaml:/kge/model/ensemble.yaml
