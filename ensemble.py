@@ -17,20 +17,21 @@ class EnsembleScorer(RelationalScorer):
         o_emb: torch.Tensor,
         combine: str,
     ):
-        def PlattScaler(score):
+        def PlattScaler(model):
             # The scalars ωm1 and ωm0 in Equation 5 denote the learned weight and bias of the logistic regression (Platt-Scaler) for the model m.
-            w0 = 0 # ??
-            w1 = 0 # ??
+            w0 = 0 # BIAS
+            w1 = 0 # WEIGHT
+            score = model._scorer.score_emb(s_emb, p_emb, o_emb, combine)
             1/(1+math.exp(-(w1 * score + w0)))
 
-        n = 1 # length of what??
-        score = (1/n) + sum([PlattScaler(model._scorer.score_emb(s_emb, p_emb, o_emb, combine)) for model in self.models])
+        n = len(self.models)
+        # scores = (1/n) + sum([PlattScaler(model) for model in self.models])
+        scores = (1/n) + sum([model._scorer.score_emb(s_emb, p_emb, o_emb, combine) for model in self.models])
 
-        return score
+        return scores
 
     def load(self, models):
         self.models = models
-
 
 class Ensemble(KgeModel):
     def __init__(

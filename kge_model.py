@@ -698,17 +698,6 @@ class KgeModel(KgeBase):
             o = self.get_o_embedder().embed_all()
         else:
             o = self.get_o_embedder().embed(o)
-
-        tensors = self._scorer.score_emb(s, p, o, combine="sp_")
-        resultList = []
-
-        for tensorOuter in tensors:
-            resultOuter = []
-            for tensorInner in tensorOuter:
-                resultOuter.append(tensorInner.item())
-            resultList.append(resultOuter)
-
-        print(resultList)
         
         return self._scorer.score_emb(s, p, o, combine="sp_")
 

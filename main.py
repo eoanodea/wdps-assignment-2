@@ -13,6 +13,7 @@ import kge
 from kge.model import KgeModel
 from kge.util.io import load_checkpoint
 from kge.job.eval import EvaluationJob
+from kge.job.eval_entity_ranking import EntityRankingJob
 from kge.model.ensemble import Ensemble
 
 # Main Class
@@ -31,11 +32,10 @@ class Main():
         self.model.load(models)
 
     def evaluate(self):
-        s = torch.Tensor([0, 2,]).long()             # subject indexes
-        p = torch.Tensor([0, 1,]).long()             # relation indexes
-        scores = self.model.score_sp(s, p)           # scores of all objects for (s,p,?)
-        o = torch.argmax(scores, dim=-1)             # index of highest-scoring objects
-        
+        job = EntityRankingJob(self.model.config, self.model.dataset, None, self.model)
+        job._prepare()
+        job._run()
+
 # Execute main functionality
 if __name__ == '__main__':
     def to_list(arg):
