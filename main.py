@@ -29,7 +29,7 @@ class Main():
                 )
             )
             
-        self.model = KgeModel.create(models[0].config , models[0].dataset, 'ensemble')
+        self.model = KgeModel.create(models[0].config, models[0].dataset, 'ensemble')
         self.model.load(models)
 
     def evaluate(self):

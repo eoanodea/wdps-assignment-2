@@ -13,3 +13,4 @@ services:
       - ./output:/kge/output
       - ./ensemble.py:/kge/model/ensemble.py
       - ./ensemble.yaml:/kge/model/ensemble.yaml
+      - ./config-default.yaml:/kge/kge/config-default.yaml
