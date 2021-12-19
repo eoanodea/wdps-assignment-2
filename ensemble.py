@@ -1,4 +1,7 @@
+import math
+
 import torch
+
 from kge import Config, Dataset
 from kge.model.kge_model import KgeEmbedder, KgeModel, RelationalScorer
 
@@ -20,8 +23,8 @@ class EnsembleScorer(RelationalScorer):
             w1 = 0 # ??
             1/(1+math.exp(-(w1 * score + w0)))
 
-        n = 0 # length of what??
-        score = (1/n) + sum([PlattScaler(model.score_emb(s_emb, p_emb, o_emb, combine)) for model in models])
+        n = 1 # length of what??
+        score = (1/n) + sum([PlattScaler(model._scorer.score_emb(s_emb, p_emb, o_emb, combine)) for model in self.models])
 
         return score
 
