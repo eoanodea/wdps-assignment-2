@@ -4,10 +4,10 @@ import math
 from decimal import Decimal
 import matplotlib.pyplot as plt
 
-rescal = pd.read_csv("outputRESCAL.csv")
-distmult = pd.read_csv("outputDistMult.csv")
-complex = pd.read_csv("outputComplEx.csv")
-transe = pd.read_csv("outputTransE.csv")
+rescal = pd.read_csv("output/outputRESCAL.csv")
+distmult = pd.read_csv("output/outputDistMult.csv")
+complex = pd.read_csv("output/outputComplEx.csv")
+transe = pd.read_csv("output/outputTransE.csv")
 
 rescalUnF = rescal.iloc[4:8,1]
 distmultUnF = distmult.iloc[4:8,1]
