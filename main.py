@@ -35,9 +35,6 @@ class Main():
         p = torch.Tensor([0, 1,]).long()             # relation indexes
         scores = self.model.score_sp(s, p)           # scores of all objects for (s,p,?)
         o = torch.argmax(scores, dim=-1)             # index of highest-scoring objects
-
-        print(s,p,o)
-        print(scores)
         pass
         # eval_split = self.config.get("eval.split")
         # triples = self.dataset.split(eval_split) 

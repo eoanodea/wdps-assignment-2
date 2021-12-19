@@ -14,16 +14,16 @@ class EnsembleScorer(RelationalScorer):
         o_emb: torch.Tensor,
         combine: str,
     ):
-        # embs = []
-        # for model in self.models:
-        #     s = model.get_s_embedder().embed(s_emb)
-        #     p = model.get_s_embedder().embed(p_emb)
-        #     o = model.get_o_embedder().embed_all()
+        def PlattScaler(score):
+            # The scalars ωm1 and ωm0 in Equation 5 denote the learned weight and bias of the logistic regression (Platt-Scaler) for the model m.
+            w0 = 0 # ??
+            w1 = 0 # ??
+            1/(1+math.exp(-(w1 * score + w0)))
 
-        #     embs.append(
-        #         model._scorer.score_emb(s, p, o, combine="sp_")
-        #     )
-        # return embs
+        n = 0 # length of what??
+        score = (1/n) + sum([PlattScaler(model.score_emb(s_emb, p_emb, o_emb, combine)) for model in models])
+
+        print(score)
         return self.models[0]._scorer.score_emb(s_emb, p_emb, o_emb, combine)
 
     def load(self, models):
