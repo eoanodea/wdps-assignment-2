@@ -5,6 +5,9 @@ services:
       context: .
     volumes:
       - ./main.py:/kge/main.py
-      - ./train.yaml:/kge/examples/train.yaml
-      - ./rescal.yaml:/kge/examples/rescal.yaml
+      - ./results/dbpedia50-complex.yaml:/kge/examples/dbpedia50-complex.yaml
       - ./results:/kge/local/experiments/main
+      - ./configurations/train.yaml:/kge/examples/train.yaml
+      - ./configurations/rescal.yaml:/kge/examples/rescal.yaml
+      - ./kge_model.py:/kge/kge/model/kge_model.py
+      - ./output:/kge/output
