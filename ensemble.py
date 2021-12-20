@@ -3,6 +3,8 @@ import torch
 from kge import Config, Dataset
 from kge.model.kge_model import KgeEmbedder, KgeModel, RelationalScorer
 
+from kge.model.complex import ComplExScorer
+
 class EnsembleScorer(RelationalScorer):
     def __init__(self, config: Config, dataset: Dataset, configuration_key=None):
         super().__init__(config, dataset, configuration_key)
@@ -24,7 +26,6 @@ class EnsembleScorer(RelationalScorer):
 
         n = len(self.models)
         scores = (1/n) + sum([PlattScaler(model) for model in self.models])
-        # scores = (1/n) + sum([model._scorer.score_emb(s_emb, p_emb, o_emb, combine) for model in self.models])
 
         return scores
 
@@ -51,4 +52,3 @@ class Ensemble(KgeModel):
     def load(self, models):
         self.models = models
         self._scorer.load(models)
-    

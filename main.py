@@ -30,12 +30,17 @@ class Main():
             
         self.model = KgeModel.create(models[0].config, models[0].dataset, 'ensemble')
         self.model.load(models)
+        self.model.eval()
 
     def evaluate(self):
-        job = EntityRankingJob(self.model.config, self.model.dataset, None, self.model)
-        job._prepare()
-        job._run()
-
+        job = EvaluationJob.create(
+            self.model.config,
+            self.model.datasets,
+            None,
+            self.model
+            )
+        job.run()
+    
 # Execute main functionality
 if __name__ == '__main__':
     def to_list(arg):
