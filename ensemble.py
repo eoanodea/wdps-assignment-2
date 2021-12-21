@@ -24,7 +24,7 @@ class Ensemble(KgeModel):
     def load(self, models):
         self.models = models
     
-    def PlattScaler(score):
+    def PlattScaler(self, score):
         # The scalars ωm1 and ωm0 in Equation 5 denote the learned weight and bias of the logistic regression (Platt-Scaler) for the model m.
         bias = torch.Tensor([1,])
         weight = torch.Tensor([1,])
