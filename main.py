@@ -4,7 +4,7 @@ import glob, os
 import math
 
 # CLI libraries
-from tqdm import tqdm
+# from tqdm import tqdm
 import argparse
 
 # Torch and KGE
@@ -33,13 +33,29 @@ class Main():
         self.model.eval()
 
     def evaluate(self):
-        job = EvaluationJob.create(
-            self.model.config,
-            self.model.datasets,
-            None,
-            self.model
-            )
-        job.run()
+        def test_model(model):
+            s = torch.Tensor([0, 2,]).long()             # subject indexes
+            p = torch.Tensor([0, 1,]).long()             # relation indexes
+            scores = model.score_sp(s, p)                # scores of all objects for (s,p,?)
+            o = torch.argmax(scores, dim=-1)             # index of highest-scoring objects
+
+            print("1:", o)
+            print("2:",model.dataset.entity_strings(s))       # convert indexes to mentions
+            print("3:",model.dataset.relation_strings(p))
+            print("4:",model.dataset.entity_strings(o))
+            
+        print("Model 1:")
+        test_model(self.model.models[0])
+        print("Yeehaw Model")
+        test_model(self.model)
+
+        # job = EvaluationJob.create(
+        #     self.model.config,
+        #     self.model.datasets,
+        #     None,
+        #     self.model
+        #     )
+        # job.run()
     
 # Execute main functionality
 if __name__ == '__main__':
