@@ -698,17 +698,6 @@ class KgeModel(KgeBase):
             o = self.get_o_embedder().embed_all()
         else:
             o = self.get_o_embedder().embed(o)
-
-        # tensors = self._scorer.score_emb(s, p, o, combine="sp_")
-        # resultList = []
-
-        # for tensorOuter in tensors:
-        #     resultOuter = []
-        #     for tensorInner in tensorOuter:
-        #         resultOuter.append(tensorInner.item())
-        #     resultList.append(resultOuter)
-
-        # print(resultList)
         
         return self._scorer.score_emb(s, p, o, combine="sp_")
 
@@ -748,7 +737,7 @@ class KgeModel(KgeBase):
         If `p` is not None, it is a vector holding the indexes of the relations to score.
 
         """
-        s = self.get_s_embedder().embed(s)
+        s = self.get_s_embedder().embed(s) 
         o = self.get_o_embedder().embed(o)
         if p is None:
             p = self.get_p_embedder().embed_all()

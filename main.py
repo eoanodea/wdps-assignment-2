@@ -4,7 +4,7 @@ import glob, os
 import math
 
 # CLI libraries
-from tqdm import tqdm
+# from tqdm import tqdm
 import argparse
 
 # Torch and KGE
