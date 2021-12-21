@@ -33,7 +33,7 @@ class Ensemble(KgeModel):
     def score_spo(self, score_spos: Tensor, p: Tensor, o: Tensor, direction=None) -> Tensor:
         scores = []
         for model in self.models:
-            score = model.score_spo(s, p, o, direction)
+            score = model.score_spo(score_spos, p, o, direction)
             scores.append(score)
 
         n = len(self.models)
@@ -55,7 +55,7 @@ class Ensemble(KgeModel):
     def score_po(self, p: Tensor, o: Tensor, s: Tensor = None) -> Tensor:
         scores = []
         for model in self.models:
-            score = model.score_po(s, p, o)
+            score = model.score_po(p, o, s)
             scores.append(score)
 
         n = len(self.models)
@@ -66,7 +66,7 @@ class Ensemble(KgeModel):
     def score_so(self, s: Tensor, o: Tensor, p: Tensor = None) -> Tensor:
         scores = []
         for model in self.models:
-            score = model.score_so(s, p, o)
+            score = model.score_so(s, o, p)
             scores.append(score)
 
         n = len(self.models)
