@@ -21,7 +21,7 @@ class Ensemble(KgeModel):
         )
         self.models = []
 
-    def load(self, models, checkpoints):
+    def load(self, models):
         self.models = models
     
     def PlattScaler(score):
