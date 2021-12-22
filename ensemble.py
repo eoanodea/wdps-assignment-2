@@ -43,35 +43,13 @@ class Ensemble(KgeModel):
         return self.score(scores)
 
     def score_sp(self, s: Tensor, p: Tensor, o: Tensor = None) -> Tensor:
-        scores = []
-        for model in self.models:
-            score = model.score_sp(s, p, o)
-            scores.append(score)
-
-        return self.score(scores)
+        return self.score([model.score_sp(s, p, o) for model in self.models])
 
     def score_po(self, p: Tensor, o: Tensor, s: Tensor = None) -> Tensor:
-        scores = []
-        for model in self.models:
-            score = model.score_po(p, o, s)
-            scores.append(score)
-
-        return self.score(scores)
+        return self.score([model.score_po(p, o, s) for model in self.models])
 
     def score_so(self, s: Tensor, o: Tensor, p: Tensor = None) -> Tensor:
-        scores = []
-        for model in self.models:
-            score = model.score_so(s, o, p)
-            scores.append(score)
+        return self.score([model.score_so(s, o, p) for model in self.models])
 
-        return self.score(scores)
-
-    def score_sp_po(
-        self, s: Tensor, p: Tensor, o: Tensor, entity_subset: Tensor = None
-    ) -> Tensor:
-        scores = []
-        for model in self.models:
-            score = model.score_sp_po(s, p, o, entity_subset)
-            scores.append(score)
-
-        return self.score(scores)
+    def score_sp_po(self, s: Tensor, p: Tensor, o: Tensor, entity_subset: Tensor = None) -> Tensor:
+        return self.score([model.score_sp_po(s, p, o, entity_subset) for model in self.models])
