@@ -34,7 +34,6 @@ class Main():
         self.model = KgeModel.create(models[0].config, models[0].dataset, 'ensemble')
         self.model.load(models)
         self.model.eval()
-        self.eval_split = 'test'
 
     def evaluate(self):
         

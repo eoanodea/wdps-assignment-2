@@ -24,12 +24,11 @@ class Ensemble(KgeModel):
             init_for_load_only=init_for_load_only,
         )
         self.models = []
-        self.predictions = []
+        self.plattScalers = []
 
     def load(self, models):
         self.models = models
         self.train_platt_scaler()
-        print(np.mean(self.predictions, axis = 0))
     
     def train_platt_scaler(self):
         for model in self.models:
@@ -62,21 +61,23 @@ class Ensemble(KgeModel):
             ps_model = LogisticRegression(random_state=0)
             ps_model.fit(theta.long().numpy().reshape(-1,1), y)
 
-            # save results
-            for prediction in train_predictions:
-                probability = ps_model.predict_proba(prediction.long().reshape(-1, 1))
-                probabilities.append(probability)
-            self.predictions.append(probabilities)
+
+            self.plattScalers.append(ps_model)
 
     def platt_scaler(self, score) -> Tensor:
         # The scalars ωm1 and ωm0 in Equation 5 denote the learned weight and bias of the logistic regression (Platt-Scaler) for the model m.
-        bias = torch.Tensor([1,])
-        weight = torch.Tensor([1,])
-        return 1/(1+torch.exp(-(weight * score + bias)))
 
-    def score(self, scores) -> Tensor:          
+        for lr_models in self.plattScalers:
 
+            bias = lr_models.coef_[0]
+            weight = lr_models.intercept_[0]
+            return 1/(1+torch.exp(-(weight * score + bias)))
+
+
+    def score(self, scores) -> Tensor:
+            
         n = len(self.models)
+        
         return (1/n) + sum([self.platt_scaler(score) for score in scores])
 
     def score_spo(self, score_spos: Tensor, p: Tensor, o: Tensor, direction=None) -> Tensor:
