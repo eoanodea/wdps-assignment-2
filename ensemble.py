@@ -35,12 +35,7 @@ class Ensemble(KgeModel):
         return (1/n) + sum([self.platt_scaler(score) for score in scores])
 
     def score_spo(self, score_spos: Tensor, p: Tensor, o: Tensor, direction=None) -> Tensor:
-        scores = []
-        for model in self.models:
-            score = model.score_spo(score_spos, p, o, direction)
-            scores.append(score)
-
-        return self.score(scores)
+        return self.score([model.score_spo(score_spos, p, o, direction) for model in self.models])
 
     def score_sp(self, s: Tensor, p: Tensor, o: Tensor = None) -> Tensor:
         return self.score([model.score_sp(s, p, o) for model in self.models])
