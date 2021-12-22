@@ -24,11 +24,15 @@ class Ensemble(KgeModel):
     def load(self, models):
         self.models = models
     
-    def PlattScaler(self, score):
+    def platt_scaler(self, score) -> Tensor:
         # The scalars ωm1 and ωm0 in Equation 5 denote the learned weight and bias of the logistic regression (Platt-Scaler) for the model m.
         bias = torch.Tensor([1,])
         weight = torch.Tensor([1,])
         return 1/(1+torch.exp(-(weight * score + bias)))
+
+    def score(self, scores) -> Tensor:
+        n = len(self.models)
+        return (1/n) + sum([self.platt_scaler(score) for score in scores])
 
     def score_spo(self, score_spos: Tensor, p: Tensor, o: Tensor, direction=None) -> Tensor:
         scores = []
@@ -36,10 +40,7 @@ class Ensemble(KgeModel):
             score = model.score_spo(score_spos, p, o, direction)
             scores.append(score)
 
-        n = len(self.models)
-        scores = (1/n) + sum([self.PlattScaler(score) for score in scores])
-    
-        return scores
+        return self.score(scores)
 
     def score_sp(self, s: Tensor, p: Tensor, o: Tensor = None) -> Tensor:
         scores = []
@@ -47,10 +48,7 @@ class Ensemble(KgeModel):
             score = model.score_sp(s, p, o)
             scores.append(score)
 
-        n = len(self.models)
-        scores = (1/n) + sum([self.PlattScaler(score) for score in scores])
-    
-        return scores
+        return self.score(scores)
 
     def score_po(self, p: Tensor, o: Tensor, s: Tensor = None) -> Tensor:
         scores = []
@@ -58,10 +56,7 @@ class Ensemble(KgeModel):
             score = model.score_po(p, o, s)
             scores.append(score)
 
-        n = len(self.models)
-        scores = (1/n) + sum([self.PlattScaler(score) for score in scores])
-    
-        return scores
+        return self.score(scores)
 
     def score_so(self, s: Tensor, o: Tensor, p: Tensor = None) -> Tensor:
         scores = []
@@ -69,10 +64,7 @@ class Ensemble(KgeModel):
             score = model.score_so(s, o, p)
             scores.append(score)
 
-        n = len(self.models)
-        scores = (1/n) + sum([self.PlattScaler(score) for score in scores])
-    
-        return scores
+        return self.score(scores)
 
     def score_sp_po(
         self, s: Tensor, p: Tensor, o: Tensor, entity_subset: Tensor = None
@@ -82,7 +74,4 @@ class Ensemble(KgeModel):
             score = model.score_sp_po(s, p, o, entity_subset)
             scores.append(score)
 
-        n = len(self.models)
-        scores = (1/n) + sum([self.PlattScaler(score) for score in scores])
-    
-        return scores
+        return self.score(scores)
