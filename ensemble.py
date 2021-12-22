@@ -29,6 +29,7 @@ class Ensemble(KgeModel):
     def load(self, models):
         self.models = models
         self.train_platt_scaler()
+        print(np.mean(self.predictions, axis = 0))
     
     def train_platt_scaler(self):
         for model in self.models:
@@ -65,8 +66,6 @@ class Ensemble(KgeModel):
             for prediction in train_predictions:
                 probability = ps_model.predict_proba(prediction.long().reshape(-1, 1))
                 probabilities.append(probability)
-                break
-
             self.predictions.append(probabilities)
 
     def platt_scaler(self, score) -> Tensor:
@@ -75,8 +74,7 @@ class Ensemble(KgeModel):
         weight = torch.Tensor([1,])
         return 1/(1+torch.exp(-(weight * score + bias)))
 
-    def score(self, scores) -> Tensor:
-            
+    def score(self, scores) -> Tensor:          
 
         n = len(self.models)
         return (1/n) + sum([self.platt_scaler(score) for score in scores])
