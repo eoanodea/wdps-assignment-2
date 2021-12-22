@@ -3,3 +3,4 @@ results/*
 *.log
 __pycache__/
 .DS_Store
+data_files/

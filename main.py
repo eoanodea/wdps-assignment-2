@@ -34,8 +34,9 @@ class Main():
         self.model = KgeModel.create(models[0].config, models[0].dataset, 'ensemble')
         self.model.load(models)
         self.model.eval()
-
+        
     def evaluate(self):
+        
         job = EvaluationJob.create(
             self.model.config,
             self.model.dataset,
