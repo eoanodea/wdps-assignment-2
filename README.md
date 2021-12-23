@@ -97,7 +97,7 @@ First, the 4 different models were tested and evaluated on the same dataset (i.e
 To get a good visualization of the performance of the models regarding the hits@k. Two graphs of the filtered and unfiltered hits are created.
 
 ```{r, fig.width = 2}
-include_graphics(/Users/max/Documents/Econometrie/UnfilteredHits)
+include_graphics('/Users/max/Documents/Econometrie/UnfilteredHits')
 ```
 
 
