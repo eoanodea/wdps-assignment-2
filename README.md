@@ -83,7 +83,7 @@ docker-compose up [-d]
 
 ##### 3 Install all of the the datasets
 If you're using the local option, head over to /kge/data and run "sh download_all.sh" 
-If you're using the docker option, enter the container, and run "sh initialize.sh" 
+If you're using the docker option, enter the container, and run "sh /kge/data/download_all.sh" 
 
 ### Development
 Here are some useful tools to help you while developing!
@@ -100,10 +100,10 @@ kge start examples/rescal.yaml --folder="/kge/local/experiments/main/rescal" --j
 
 To clean an output file
 ```
-python3 /kge/utilities/clean_output.py results/rescal/test-result.csv > output.csv
+python3 clean_output.py results/rescal/test-result.csv > output.csv
 ```
 
 To plot an output file
 ```
-python3 /kge/utilities/plot_output.py results/rescal/test-result.csv > output.csv
+python3 plot_output.py results/rescal/test-result.csv > output.csv
 ```
