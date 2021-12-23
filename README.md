@@ -41,32 +41,6 @@ To clean an output file
 python3 clean.py results/rescal/test-result.csv > output.csv
 ```
 
-To see the predictions, you need to modify the KGE model located here:
-```
-/kge/mode/kge_model.py
-```
-
-Add this code *above* the return statement [Line 702]
-
-```py
-        tensors = self._scorer.score_emb(s, p, o, combine="sp_")
-        resultList = []
-
-        for tensorOuter in tensors:
-            resultOuter = []
-            for tensorInner in tensorOuter:
-                resultOuter.append(tensorInner.item())
-            resultList.append(resultOuter)
-
-        print(resultList)
-```
-
-And run this commend to test
-
-```
-kge test local/experiments/main/[DIR NAME] > test-result.csv
-```
-
 ## Preliminary Results
 
 First, the 4 different models were tested and evaluated on the same dataset (i.e. DBPedia50) to see what the results of each model is. For each of these models, the mean rank, the mean rank filtered, the mean reciprocal rank, and the mean reciprocal rank filtered were estimated as well as the unfiltered and filtered (F) hits@k.
