@@ -4,7 +4,6 @@ import glob, os
 import math
 
 # CLI libraries
-# from tqdm import tqdm
 import argparse
 
 # Torch and KGE
@@ -30,18 +29,15 @@ class Main():
                 )
             )
             
-        # are we using KgeModel.create correctly here?
         self.model = KgeModel.create(models[0].config, models[0].dataset, 'ensemble')
         self.model.load(models)
         self.model.eval()
 
     def evaluate(self):
-        
         job = EvaluationJob.create(
             self.model.config,
             self.model.dataset,
             None,
-            #self.model.models[0]
             self.model
             )
         job.run()
