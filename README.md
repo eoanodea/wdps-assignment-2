@@ -71,14 +71,30 @@ kge test local/experiments/main/[DIR NAME] > test-result.csv
 
 ## Preliminary Results
 
-First, the 4 different models were tested and evaluated on the same dataset (i.e. DBPedia50) to see what the results of each model is. 
+First, the 4 different models were tested and evaluated on the same dataset (i.e. DBPedia50) to see what the results of each model is. For each of these models, the mean rank, the mean rank filtered, the mean reciprocal rank, and the mean reciprocal rank filtered were estimated as well as the unfiltered and filtered (F) hits@k.
 
-| Model    | Mean rank | Mean rank filtered | Mean reciprocal rank | Mean reciprocal rank filtered |
-|----------|-----------|--------------------|----------------------|-------------------------------|
-| RESCAL   | 360.200   | 186.395            | 0.179                | 0.354                         |
-| ComplEx  | 10157.081 | 10120.005          | 0.122                | 0.132                         |
-| TransE   | 6760.479  | 6723.095           | 0.095                | 0.099                         |
-| DistMult | 14167.605 | 14130.465          | 0.021                | 0.021                         |
+| Model    | Mean rank | Mean rank (F) | Mean reciprocal rank | Mean reciprocal rank (F)|
+|----------|-----------|---------------|----------------------|-------------------------|
+| RESCAL   | 360.200   | 186.395       | 0.179                | 0.354                   |
+| ComplEx  | 10157.081 | 10120.005     | 0.122                | 0.132                   |
+| TransE   | 6760.479  | 6723.095      | 0.095                | 0.099                   |
+| DistMult | 14167.605 | 14130.465     | 0.021                | 0.021                   |
+
+| Model    | Hits@1 | Hits@10 | Hits@100 | Hits@1000 |
+|----------|--------|---------|----------|-----------|
+| RESCAL   | 0.110  | 0.324   | 0.643    | 0.907     |
+| ComplEx  | 0.094  | 0.173   | 0.238    | 0.311     |
+| TransE   | 0.065  | 0.152   | 0.227    | 0.315     |
+| DistMult | 0.013  | 0.037   | 0.079    | 0.139     |
+
+| Model (F)| Hits@1 | Hits@10 | Hits@100 | Hits@1000 |
+|----------|--------|---------|----------|-----------|
+| RESCAL   | 0.262  | 0.534   | 0.786    | 0.956     |
+| ComplEx  | 0.109  | 0.177   | 0.240    | 0.313     |
+| TransE   | 0.069  | 0.155   | 0.232    | 0.318     |
+| DistMult | 0.013  | 0.037   | 0.081    | 0.141     |
+
+
 
 
 
