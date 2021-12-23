@@ -99,9 +99,9 @@ First, the 4 different models were tested and evaluated on the same dataset (i.e
 
 To get to the point where we can get to ensemble multiple models from the KGE package, we scale the scores we got from the the different models with the Platt Scaler: 
 
-'''
-*P*
-'''
+```
+*P(x_{s,p,o} = 1 | $\theta$^m_{s,p,o})
+```
 
 
         
