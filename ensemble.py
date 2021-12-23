@@ -30,7 +30,7 @@ class Ensemble(KgeModel):
         self.train_platt_scaler()
     
     def train_platt_scaler(self):
-        for i, current in enumerate(self.ensemble):
+        for model_i, current in enumerate(self.ensemble):
             # read train/test sets
             test_set = pd.read_csv(current.model.dataset.folder + '/test.del', on_bad_lines='skip', sep = '\t', header = None, names = ['s', 'p', 'o'])
             train_set = pd.read_csv(current.model.dataset.folder + '/train.del', on_bad_lines='skip', sep = '\t', header = None, names = ['s','p','o'])
@@ -59,19 +59,18 @@ class Ensemble(KgeModel):
             y = [i == j for i, j in zip(estimated_o, real_o)]
 
             # train and fit model
-            current[i].scaler = LogisticRegression(random_state=0)
-            current[i].scaler.fit(X, y)
+            current[model_i].scaler = LogisticRegression(random_state=0)
+            current[model_i].scaler.fit(X, y)
             
-    def platt_scaler(self, i, score) -> Tensor:
+    def platt_scaler(self, model_i, score) -> Tensor:
         # The scalars ωm1 and ωm0 in Equation 5 denote the learned weight and bias of the logistic regression (Platt-Scaler) for the model m.
-        bias = self.ensemble[i].scaler.coef_[0]
-        weight = self.ensemble[i].scaler.intercept_[0]
+        bias = self.ensemble[model_i].scaler.coef_[0]
+        weight = self.ensemble[model_i].scaler.intercept_[0]
         return 1/(1+torch.exp(-(weight * score + bias)))
-
 
     def score(self, scores) -> Tensor:
         n = len(self.ensemble)
-        return (1/n) + sum([self.platt_scaler(i, score) for i, score in enumerate(scores)])
+        return (1/n) + sum([self.platt_scaler(model_i, score) for model_i, score in enumerate(scores)])
 
     def score_spo(self, score_spos: Tensor, p: Tensor, o: Tensor, direction=None) -> Tensor:
         return self.score([current.model.score_spo(score_spos, p, o, direction) for current in self.ensemble])
