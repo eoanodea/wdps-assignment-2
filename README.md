@@ -10,8 +10,6 @@ Max Wassenberg - 2579797 - m.n.wassenberg@student.vu.nl
 ## Introduction
 For assignment 2, the focus shifted from word sense disambiguation to link prediction. Some solutions discussed in class were: Rule-based methods, Probabilistic methods, Factorization models, and embedding models. At first, the main focus was to explore the mechanics of link prediction behind a factorization model: RESCAL. While doing so, we could not find a well-set goal for this subject. We shifted our interest towards multiple models and came across the article 'Ensemble Solutions for Link-Prediction in Knowledge Graphs' written by Denis Krompass and Volker Tresp. Krompass and Tresp proposed a solution where they ensemble multiple models to get a higher hits@k result than when one model explores a dataset. To work with different kinds of models and evaluate these, the LibBKGE package is used. We explored four different modules; RESCAL, TransE, ComplEx, and DistMult. 
 
-# Design Choices and Rationale
-
 ## Preliminary Results
 
 First, the 4 different models were tested and evaluated on the same dataset (i.e. DBPedia50) to see what the results of each model is. For each of these models, the mean rank, the mean rank filtered, the mean reciprocal rank, and the mean reciprocal rank filtered were estimated as well as the unfiltered and filtered (F) hits@k.
