@@ -1,45 +1,16 @@
-# Web Data Processing Systems - Assignment #2
+# Assignment 2a
+Alex Antonides - 2693298 - a.m.antonides@student.vu.nl
+
+Eoan O'Dea - 2732791 - e.odea@student.vu.nl
+
+Tom Corten - 2618068 - t.a.corten@student.vu.nl
+
+Max Wassenberg - 2579797 - m.n.wassenberg@student.vu.nl
 
 ## Introduction
-For assignment 2, the focus shifted from word sense disambiguation to link prediction. Some solutions discussed in class were: Rule-based methods, Probabilistic methods, Factorization models, and embedding models. At first, the main focus was to explore the mechanics of link prediction behind a factorization model: RESCAL. While doing so, we could not find a well set goal for this subject. We shifted our interest towards multiple models and came across the article 'Ensemble Solutions for Link-Prediction in Knowledge Graphs' written by Denis Krompass and Volker Tresp. Krompass and Tresp proposed a solution where they ensemble multiple models to get a higher hits@k result than when one model explores a dataset. To work with different kind of models and evaluate these, the LibBKGE package is used. We epxlored four different modles; RESCAL, TransE, ComplEx, and DistMult. 
+For assignment 2, the focus shifted from word sense disambiguation to link prediction. Some solutions discussed in class were: Rule-based methods, Probabilistic methods, Factorization models, and embedding models. At first, the main focus was to explore the mechanics of link prediction behind a factorization model: RESCAL. While doing so, we could not find a well-set goal for this subject. We shifted our interest towards multiple models and came across the article 'Ensemble Solutions for Link-Prediction in Knowledge Graphs' written by Denis Krompass and Volker Tresp. Krompass and Tresp proposed a solution where they ensemble multiple models to get a higher hits@k result than when one model explores a dataset. To work with different kinds of models and evaluate these, the LibBKGE package is used. We explored four different modules; RESCAL, TransE, ComplEx, and DistMult. 
 
-## Todo
-- [x]  Download LibKG
-- [x]  Train DBPedia (consider other models TransE, conflicts etc)
-- [ ]  Link prediction using test dataset
-- [ ]  Determine whether there are relations
-- [ ]  Simple method to filter out noise
-- [ ]  Provide high quality output
-- [ ]  Which links should be kept and which should not
-
-## Fun commands
-
-To start the container:
-```
-docker-compose up
-```
-
-To find the container's name:
-```
-docker container ls
-```
-
-To train a model:
-```
-docker exec -it <container_name> /bin/sh
-kge start examples/train.yaml --folder="/kge/local/experiments/main/new" --job.device cpu 
-```
-
-
-To train a Rescal Model
-```
-kge start examples/rescal.yaml --folder="/kge/local/experiments/main/rescal" --job.device cpu 
-```
-
-To clean an output file
-```
-python3 clean.py results/rescal/test-result.csv > output.csv
-```
+# Design Choices and Rationale
 
 ## Preliminary Results
 
@@ -54,23 +25,85 @@ First, the 4 different models were tested and evaluated on the same dataset (i.e
 
 | Model    | Hits@1 | Hits@10 | Hits@100 | Hits@1000 |
 |----------|--------|---------|----------|-----------|
-| RESCAL   | 0.110  | 0.324   | 0.643    | 0.907     |
-| ComplEx  | 0.094  | 0.173   | 0.238    | 0.311     |
-| TransE   | 0.065  | 0.152   | 0.227    | 0.315     |
-| DistMult | 0.013  | 0.037   | 0.079    | 0.139     |
+| RESCAL   | 0.076  | 0.138   | 0.198    | 0.281     |
+| ComplEx  | 0.128  | 0.233   | 0.308    | 0.382     |
+| TransE   | 0.088  | 0.202   | 0.303    | 0.400     |
+| DistMult | 0.003  | 0.006   | 0.015    | 0.038     |
 
 | Model (F)| Hits@1 | Hits@10 | Hits@100 | Hits@1000 |
 |----------|--------|---------|----------|-----------|
-| RESCAL   | 0.262  | 0.534   | 0.786    | 0.956     |
+| RESCAL   | 0.094  | 0.148   | 0.213    | 0.281     |
 | ComplEx  | 0.109  | 0.177   | 0.240    | 0.313     |
-| TransE   | 0.069  | 0.155   | 0.232    | 0.318     |
-| DistMult | 0.013  | 0.037   | 0.081    | 0.141     |
-
+| TransE   | 0.091  | 0.207   | 0.307    | 0.400     |
+| DistMult | 0.003  | 0.006   | 0.015    | 0.038     |
 
 ## Results
 
-To get to the point where we can get to ensemble multiple models from the KGE package, we scale the scores we got from the the different models with the Platt Scaler.
+To get to the point where we can get to ensemble multiple models from the KGE package, we scale the scores we got from the different models with the Platt Scaler.
 
 ## Technical Challenges
 
 Various technical challenges were encountered during this project. A substantial one was extending the LIBKge library. Since the library is built around each model having a dataset and a configuration file, tuning it to take in multiple models was very challenging, and required us to replace most of the functionality so it would work on our ensemble model. Another issue was implementing the Platt scaler. It turned out to be very similar to a Linear Regression model, which only takes in a single input. This resulted in big issues for our models.
+
+## Getting Started
+
+These instructions will get you a copy up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+### Prerequisites
+##### 1. Install the following software:
+- [ ] (Option Docker)[Docker](https://www.docker.com/)
+
+- [ ] (Option Local)[Python 3](https://www.python.corg/)
+- [ ] (Option Local)[PIP](https://pip.pypa.io/en/stable/cli/pip_install/)
+- [ ] (Option Local)[PyTorch](https://pytorch.org/)
+  
+- [ ] (Optional for Linux GPU) [CUDA](https://developer.nvidia.com/cuda-downloads)
+  * See the [Supported Graphic Cards](https://developer.nvidia.com/cuda-gpus)
+
+### Installing
+A step by step series of examples that tell you how to get a development environment running.
+
+##### 1. Update submodules
+After cloning the repository, navigate to the project folder and run the following command: 
+```console   
+git submodule update --init --recursive
+```
+
+##### 2a. (Local) Installing the modules
+If you're not using docker, navigate to the project folder and run the following command: 
+```console   
+python -m pip install -r requirements.txt
+```
+
+##### 2b. (Docker) Start the container
+If you're using docker, run the following command:
+```console   
+docker-compose up [-d]
+```
+
+##### 3 Install all of the the datasets
+If you're using the local option, head over to /kge/data and run "sh download_all.sh" 
+If you're using the docker option, enter the container, and run "sh initialize.sh" 
+
+### Development
+Here are some useful tools to help you while developing!
+
+To train a model:
+```
+kge start examples/train.yaml --folder="/kge/local/experiments/main/new" --job.device cpu 
+```
+
+To train a Rescal Model
+```
+kge start examples/rescal.yaml --folder="/kge/local/experiments/main/rescal" --job.device cpu 
+```
+
+To clean an output file
+```
+python3 /kge/utilities/clean_output.py results/rescal/test-result.csv > output.csv
+```
+
+To plot an output file
+```
+python3 /kge/utilities/plot_output.py results/rescal/test-result.csv > output.csv
+```
