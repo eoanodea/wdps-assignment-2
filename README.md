@@ -94,12 +94,6 @@ First, the 4 different models were tested and evaluated on the same dataset (i.e
 | TransE   | 0.069  | 0.155   | 0.232    | 0.318     |
 | DistMult | 0.013  | 0.037   | 0.081    | 0.141     |
 
-To get a good visualization of the performance of the models regarding the hits@k. Two graphs of the filtered and unfiltered hits are created.
-
-```{r, fig.width = 2}
-include_graphics('/Users/max/Documents/Econometrie/UnfilteredHits')
-```
-
 
 
 
