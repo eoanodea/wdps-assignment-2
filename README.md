@@ -1,7 +1,7 @@
 # Web Data Processing Systems - Assignment #2
 
-## Description
-Link prediction with various Link Prediction models using LibKGE
+## Introduction
+For assignment 2, the focus shifted from word sense disambiguation to link prediction. Some solutions discussed in class were: Rule-based methods, Probabilistic methods, Factorization models, and embedding models. At first, the main focus was to explore the mechanics of link prediction behind a factorization model: RESCAL. While doing so, we could not find a well set goal for this subject. We shifted our interest towards multiple models and came across the article 'Ensemble Solutions for Link-Prediction in Knowledge Graphs' written by Denis Krompass and Volker Tresp. Krompass and Tresp proposed a solution where they ensemble multiple models to get a higher hits@k result than when one model explores a dataset. To work with different kind of models and evaluate these, the LibBKGE package is used. We epxlored four different modles; RESCAL, TransE, ComplEx, and DistMult. 
 
 Note Alex: Good luck on the initial download, it takes like +- 20 minutes.
 
@@ -68,4 +68,19 @@ And run this commend to test
 ```
 kge test local/experiments/main/[DIR NAME] > test-result.csv
 ```
+
+## Preliminary Results
+
+First, the 4 different models were tested and evaluated on the same dataset (i.e. DBPedia50) to see what the results of each model is. 
+
+| Model    | Mean rank | Mean rank filtered | Mean reciprocal rank | Mean reciprocal rank filtered |
+|----------|-----------|--------------------|----------------------|-------------------------------|
+| RESCAL   | 360.200   | 186.395            | 0.179                | 0.354                         |
+| ComplEx  | 10157.081 | 10120.005          | 0.122                | 0.132                         |
+| TransE   | 6760.479  | 6723.095           | 0.095                | 0.099                         |
+| DistMult | 14167.605 | 14130.465          | 0.021                | 0.021                         |
+
+
+
+
         
