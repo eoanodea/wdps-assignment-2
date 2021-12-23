@@ -99,7 +99,6 @@ First, the 4 different models were tested and evaluated on the same dataset (i.e
 
 To get to the point where we can get to ensemble multiple models from the KGE package, we scale the scores we got from the the different models with the Platt Scaler: 
 
+## Technical Challenges
 
-
-
-        
+Various technical challenges were encountered during this project. A substantial one was extending the LIBKge library. Since the library is built around each model having a dataset and a configuration file, tuning it to take in multiple models was very challenging, and required us to replace most of the functionality so it would work on our ensemble model. Another issue was implementing the Platt scaler. It turned out to be very similar to a Linear Regression model, which only takes in a single input. This resulted in big issues for our models.
