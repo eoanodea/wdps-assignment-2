@@ -61,13 +61,7 @@ class Ensemble(KgeModel):
             # train and fit model
             current[i].scaler = LogisticRegression(random_state=0)
             current[i].scaler.fit(X, y)
-
-    # def platt_scaler(self, score) -> Tensor:
-    #     # The scalars ωm1 and ωm0 in Equation 5 denote the learned weight and bias of the logistic regression (Platt-Scaler) for the model m.
-    #     weight = self.model.coef_
-    #     bias = np.hstack((self.model.intercept_[:,None], self.model.coef_))
-    #     return 1/(1+torch.exp(-(weight * score + bias)))
-
+            
     def platt_scaler(self, i, score) -> Tensor:
         # The scalars ωm1 and ωm0 in Equation 5 denote the learned weight and bias of the logistic regression (Platt-Scaler) for the model m.
         bias = self.ensemble[i].scaler.coef_[0]
