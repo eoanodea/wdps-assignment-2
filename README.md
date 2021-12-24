@@ -1,11 +1,11 @@
 # Assignment 2a
-Alex Antonides - 2693298 - a.m.antonides@student.vu.nl
 
-Eoan O'Dea - 2732791 - e.odea@student.vu.nl
-
-Tom Corten - 2618068 - t.a.corten@student.vu.nl
-
-Max Wassenberg - 2579797 - m.n.wassenberg@student.vu.nl
+| Name           | Student ID | Email                        |
+|----------------|------------|------------------------------|
+| Alex Antonides | 2693298    | a.m.antonides@student.vu.nl  |
+| Eoan O'Dea     | 2732791    | e.odea@student.vu.nl         |
+| Tom Corten     | 2618068    | t.a.corten@student.vu.nl     |
+| Max Wassenberg | 2579797    | m.n.wassenberg@student.vu.nl |
 
 ## Introduction
 For assignment 2, the focus shifted from word sense disambiguation to link prediction. Some solutions discussed in class were: Rule-based methods, Probabilistic methods, Factorization models, and embedding models. At first, the main focus was to explore the mechanics of link prediction behind a factorization model: RESCAL. While doing so, we could not find a well-set goal for this subject. We shifted our interest towards multiple models and came across the article ['Ensemble Solutions for Link-Prediction in Knowledge Graphs' written by Denis Krompass and Volker Tresp](https://www.dbs.ifi.lmu.de/~krompass/papers/EnsembleSolutionsForLinkPredictionInKnowledgeGraphs.pdf). Krompass and Tresp proposed a solution where they ensemble multiple models to get a higher hits@k result than when one model explores a dataset. To work with different kinds of models and evaluate these, the LibBKGE package is used. We explored four different modules; RESCAL, TransE, ComplEx, and DistMult. 
