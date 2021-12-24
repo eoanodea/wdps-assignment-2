@@ -105,3 +105,9 @@ To plot an output file
 ```
 python3 plot_output.py results/rescal/test-result.csv > output.csv
 ```
+
+To ensemble multiple models and test the results
+```
+python3 main.py /kge/local/experiments/main/rescal,/kge/local/experiments/main/transe
+```
+Please beware that the folder paths should be separated by comma. Do not include any spaces.
