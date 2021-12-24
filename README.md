@@ -21,8 +21,8 @@ First, the 4 different models were tested and evaluated on the same dataset (i.e
 
 | Model    | Mean rank | Mean rank (F) | Mean reciprocal rank | Mean reciprocal rank (F)|
 |----------|-----------|---------------|----------------------|-------------------------|
-| RESCAL   | 360.200   | 186.395       | 0.179                | 0.354                   |
-| ComplEx  | 10157.081 | 10120.005     | 0.122                | 0.132                   |
+| RESCAL   | 12288.21  | 12253.32      | 0.179                | 0.098                   |
+| ComplEx  | 9517.65   | 10120.005     | 0.122                | 0.132                   |
 | TransE   | 6760.479  | 6723.095      | 0.095                | 0.099                   |
 | DistMult | 14167.605 | 14130.465     | 0.021                | 0.021                   |
 
@@ -42,7 +42,15 @@ First, the 4 different models were tested and evaluated on the same dataset (i.e
 
 ## Results
 
-To get to the point where we can get to ensemble multiple models from the KGE package, we scale the scores we got from the different models with the Platt Scaler.
+To get to the point where we can get to ensemble multiple models from the KGE package, we scale the scores we got from the different models with the Platt Scaler. The model scores are noted below, it can be noted that the ensemble consisting of transE & ComplEx scores the highest hits@k
+
+
+| Model                          | Hits@1 | Hits@10 | Hits@100 | Mean rank | Mean reciprocal rank |
+|--------------------------------|--------|---------|----------|-----------|----------------------|
+| Ensemble_1 => transE + RESCAL  | 0.116  | 0.233   | 0.339    | 6542      | 0.16                 |
+| Ensemble_2 => transE + ComplEx | 0.138  | 0.251   | 0.332    | 8542      | 0.181                |
+
+
 
 ## Technical Challenges
 

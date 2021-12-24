@@ -37,12 +37,6 @@ class Ensemble(KgeModel):
             
             train_set = train_set.iloc[:200]
 
-            # test predictions
-            test_s = torch.Tensor(test_set['s'].values).long()
-            test_p = torch.Tensor(test_set['p'].values).long()         
-            test_o = torch.Tensor(test_set['o'].values).long()         
-            test_predictions = current["model"].score_sp(test_s, test_p)
-
             # train predictions
             train_s = torch.Tensor(train_set['s'].values).long()
             train_p = torch.Tensor(train_set['p'].values).long()         
