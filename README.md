@@ -63,6 +63,8 @@ These instructions will get you a copy up and running on your local machine for 
 - [ ] (Optional for Linux GPU) [CUDA](https://developer.nvidia.com/cuda-downloads)
   * See the [Supported Graphic Cards](https://developer.nvidia.com/cuda-gpus)
 
+The built models can be found [here](https://drive.google.com/file/d/1_ztur1QFbwgjyk_-u2sbmPlhbAMeFd8z/view?usp=sharing)
+
 ### Installing
 A step by step series of examples that tell you how to get a development environment running.
 
