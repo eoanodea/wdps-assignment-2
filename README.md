@@ -8,7 +8,7 @@ Tom Corten - 2618068 - t.a.corten@student.vu.nl
 Max Wassenberg - 2579797 - m.n.wassenberg@student.vu.nl
 
 ## Introduction
-For assignment 2, the focus shifted from word sense disambiguation to link prediction. Some solutions discussed in class were: Rule-based methods, Probabilistic methods, Factorization models, and embedding models. At first, the main focus was to explore the mechanics of link prediction behind a factorization model: RESCAL. While doing so, we could not find a well-set goal for this subject. We shifted our interest towards multiple models and came across the article 'Ensemble Solutions for Link-Prediction in Knowledge Graphs' written by Denis Krompass and Volker Tresp. Krompass and Tresp proposed a solution where they ensemble multiple models to get a higher hits@k result than when one model explores a dataset. To work with different kinds of models and evaluate these, the LibBKGE package is used. We explored four different modules; RESCAL, TransE, ComplEx, and DistMult. 
+For assignment 2, the focus shifted from word sense disambiguation to link prediction. Some solutions discussed in class were: Rule-based methods, Probabilistic methods, Factorization models, and embedding models. At first, the main focus was to explore the mechanics of link prediction behind a factorization model: RESCAL. While doing so, we could not find a well-set goal for this subject. We shifted our interest towards multiple models and came across the article ['Ensemble Solutions for Link-Prediction in Knowledge Graphs' written by Denis Krompass and Volker Tresp](https://www.dbs.ifi.lmu.de/~krompass/papers/EnsembleSolutionsForLinkPredictionInKnowledgeGraphs.pdf). Krompass and Tresp proposed a solution where they ensemble multiple models to get a higher hits@k result than when one model explores a dataset. To work with different kinds of models and evaluate these, the LibBKGE package is used. We explored four different modules; RESCAL, TransE, ComplEx, and DistMult. 
 
 ## Preliminary Results
 
@@ -80,9 +80,21 @@ docker-compose up [-d]
 ```
 
 ##### 3 Install all of the the datasets
-If you're using the local option, head over to /kge/data and run "sh download_all.sh" 
-If you're using the docker option, enter the container, and run "sh /kge/data/download_all.sh" 
+If you're using the local option, run:
+```
+sh /kge/data/download_all.sh
+```
 
+If you're using the docker option, enter the container by running:
+
+```
+ docker exec -it [CONTAINER_ID || CONTAINER_NAME] /bin/bash 
+```
+
+and run:
+```
+sh /kge/data/download_all.sh
+```
 ### Development
 Here are some useful tools to help you while developing!
 
